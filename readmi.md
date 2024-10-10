@@ -163,4 +163,4 @@ Este documento cubre los aspectos generales para consumir el webservice de factu
 | Valor unitario del producto      | VALITE  | 225333.00                   | DEC(15,2)           | SI   |
 | Valor total sin impuestos        | TOTVAD  | 198153.63                   | DEC(15,2)           | SI   |
 | Valor del impuesto               | VALIMD  | 0.00                        | DEC(15,2)           | NO   |
-``` 
+ 
