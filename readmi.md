@@ -47,9 +47,7 @@ La petición debe seguir la estructura proporcionada en el WSDL y debe incluir l
                     <value xsi:type="xsd:string">{JSON codificado}</value>
                 </item>
                 <!-- Otros campos como sededo, sedepr, sedeim -->
-
-Aquí tienes el código para agregar al archivo `.md` a partir del "Paso 2: Ejemplo de JSON para CABDOC":
-
+```
 ```markdown
 ### **Paso 2: Ejemplo de JSON para CABDOC**
 ```json
