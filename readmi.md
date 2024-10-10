@@ -48,7 +48,6 @@ La petición debe seguir la estructura proporcionada en el WSDL y debe incluir l
                 </item>
                 <!-- Otros campos como sededo, sedepr, sedeim -->
 ```
-```markdown
 ### **Paso 2: Ejemplo de JSON para CABDOC**
 ```json
 {
