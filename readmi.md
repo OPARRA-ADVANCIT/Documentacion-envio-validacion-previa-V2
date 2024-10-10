@@ -167,9 +167,3 @@ Este documento cubre los aspectos generales para consumir el webservice de factu
 | Valor total sin impuestos        | TOTVAD  | 198153.63                   | DEC(15,2)           | SI   |
 | Valor del impuesto               | VALIMD  | 0.00                        | DEC(15,2)           | NO   |
 ``` 
-
-Este código está en formato Markdown y listo para ser añadido a tu archivo `.md`.
-            </sendoc>
-        </ns1:send_document>
-    </SOAP-ENV:Body>
-</SOAP-ENV:Envelope>
