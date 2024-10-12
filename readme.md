@@ -67,43 +67,89 @@ La petición al servicio web debe seguir la estructura proporcionada en el WSDL,
 
 Los datos dentro del XML están en formato JSON, que debe estar correctamente estructurado. Cada sección representa un conjunto de datos que debe ser enviado.
 
-##### **Ejemplo de DATOEMP**
+## Campos de la Cabecera del Documento (CABDOC)
+| Descripción                     | Nombre  | Ejemplo                     | Especificaciones    | Nota |
+|----------------------------------|---------|-----------------------------|---------------------|------|
+| Nit de la empresa que factura    | NITEMP  | 900225722                   | CHAR(30)            | SI   |
+| Número de resolución autorizada  | NUMRES  | 1234567891000AA             | CHAR(40)            | SI   |
+| Tipo de documento a enviar  <br>01: Facturas.  <br>02: Notas débito.  <br>03: Notas crédito.      | TDOCU   | 01                          | CHAR(2)             | SI   |
+| Número de la factura, nota crédito o nota débito             | NUMERO  | 15111                       | CHAR(20)            | SI   |
+| Fecha de generación de la factura, nota crédito o nota débito| FECDOC  | 2019-05-31                  | CHAR(40)            | SI   |
+| Fecha de vencimiento, nota crédito o nota débito             | FECVEN  | 2019-05-31                  | CHAR(40)            | SI   |
+| Nombre del vendedor              | NOMVEN  | Inversiones Piedra Del Sol S.A. | CHAR(255)        | NO   |
+| Codigo de moneda de la factura, nota crédito o nota débito             | MONEDA  | COP                         | CHAR(3)             | SI   |
+| Tipo de envió para las notas crédito. <br>R: Si es una nota crédito con referencia a otra factura.             | TIPCRU  |                          |  CHAR(1)            |  SI (si es nota crédito.)  |
+| Codigo sucursal o tienda. | CODSUC |  | CHAR(50) | NO |
+| Numero de factura referenciada si la nota crédito es tipo F | NUMREF |  | CHAR(40) | SI si es nota credito |
+| Código de formato de diseño de las facturas al generar el PDF. | FORIMP |  | CHAR(2) |  NO (Esto se define si existen muchos diseños de facturas.)|
+| Este campo se utiliza si la factura, nota crédito, nota débito necesita agrupamientos. <br>D:Detallado, <br>U:Unico | CLADET | | | |
 
 
+##### **Ejemplo de CABDOC**
 
 ```json
 {
-	"DATOEMP": [
-		{
-			"NITEMP": "123456789",
-			"DIGVER": "1",
-			"NOMEMP": "Clinica de Pruebas Advancit S.A.",
-			"RASOCI": "Clinica de Pruebas Advancit S.A.",
-			"COREMP": "contacto@advancit.com",
-			"FECREG": "2022-07-15",
-			"SOFTWA": "BILLINGSOFT",
-			"IDESOF": "123abc45-678d-90ef-gh12-3456ijkl789m",
-			"PINSOT": "65432",
-			"URLENV": "https://vpfe.dian.gov.co/WcfDianCustomerServices.svc?wsdl",
-			"PREFIJ": "FACV",
-			"NUMRES": "98765432100",
-			"FECRES": "2020-05-10",
-			"RESINI": "100000001",
-			"RESFIN": "100500000",
-			"FEREIN": "2020-05-10",
-			"FEREFI": "2035-05-10",
-			"DIREMP": "Avenida Central 123",
-			"TELEMP": "3001234567",
-			"CERTIF": "CertificadoFicticio.p12",
-			"PASCER": "claveSegura123",
-			"TECKEY": "ab12cd34ef56gh78ij90klmn123opqrs456tuvwx",
-			"TESIDE": "1a2b3c4d-5678-9e0f-gh12-ijklmno34567",
-			"DEPEMP": "11",
-			"CIUEMP": "11001000",
-			"REGID": "",
-			"REGNAM": ""
-		}
-	]
+	"CABDOC": {
+		"NITEMP": "123456789",
+		"NUMRES": "98765432100",
+		"TDOCU": "01",
+		"NUMERO": "FACV100011337",
+		"FECDOC": "2024-10-10",
+		"FECVEN": "2024-10-10",
+		"NOMVEN": "SOPORTE ADVANCIT",
+		"MONEDA": "COP",
+		"TIPCRU": "",
+		"CODSUC": "1",
+		"NUMREF": "",
+		"FORIMP": "",
+		"CLADET": "D",
+		"FORPAG": "1",
+		"ORDENC": "",
+		"NUREMI": "",
+		"NORECE": "",
+		"EANTIE": "",
+		"COMODE": "COP",
+		"COMOHA": "",
+		"FACCAL": "",
+		"FETACA": "",
+		"FECREF": "",
+		"OBSREF": "",
+		"OBSERV": "",
+		"TEXDOC": "",
+		"MODEDI": "",
+		"NUMENT": "",
+		"NDIAN": "FACV100011337",
+		"SOCIED": "",
+		"CODVEN": "200",
+		"MOTDEV": "",
+		"SUBTO": "5500.00",
+		"BASIMP": "0.00",
+		"TOTFAC": "5500.00",
+		"TOTIMP": "0.00",
+		"TOTDES": "0.00",
+		"DIPAPA": "0",
+		"TIPOPE": "SS-Recaudo",
+		"MEDPAG": "10",
+		"CLAVE": "123456789",
+		"USUAR": "ADVANCIT",
+		"INPESD": "2024-10-10",
+		"INPEST": "00:00:00-05:00",
+		"INPEND": "2024-10-10",
+		"INPENT": "23:59:59-05:00",
+		"ANDREID": "",
+		"ANDREDA": "",
+		"ANDREDT": "",
+		"CUNAMA": "",
+		"CUVALA": "",
+		"CUNAMB": "",
+		"CUVALB": "",
+		"CIGSHN": "",
+		"CIGCSH": "",
+		"IPTURD": "",
+		"PREPID": 0,
+		"PREPAM": "",
+		"PREDRE": ""
+	}
 }
 ```
 
@@ -164,17 +210,7 @@ Este documento cubre los aspectos generales para consumir el webservice de factu
 
 ---
 
-## Campos de la Cabecera del Documento (CABDOC)
-| Descripción                     | Nombre  | Ejemplo                     | Especificaciones    | Nota |
-|----------------------------------|---------|-----------------------------|---------------------|------|
-| Nit de la empresa que factura    | NITEMP  | 900225722                   | CHAR(30)            | SI   |
-| Número de resolución autorizada  | NUMRES  | 1234567891000AA             | CHAR(40)            | SI   |
-| Tipo de documento a enviar       | TDOCU   | 01                          | CHAR(2)             | SI   |
-| Número de la factura             | NUMERO  | 15111                       | CHAR(20)            | SI   |
-| Fecha de generación de la factura| FECDOC  | 2019-05-31                  | CHAR(40)            | SI   |
-| Fecha de vencimiento             | FECVEN  | 2019-05-31                  | CHAR(40)            | SI   |
-| Nombre del vendedor              | NOMVEN  | Inversiones Piedra Del Sol S.A. | CHAR(255)        | NO   |
-| Moneda de la factura             | MONEDA  | COP                         | CHAR(3)             | SI   |
+
 
 ## Campos de Cliente (CLIDOC)
 | Descripción                     | Nombre  | Ejemplo                     | Especificaciones    | Nota |
