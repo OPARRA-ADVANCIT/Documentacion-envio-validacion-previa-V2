@@ -30,24 +30,39 @@ Cada una de estas secciones se incluye como un elemento `item` dentro del cuerpo
 
 ## 3. **Proceso de Integración**
 
-### **Paso 1: Construcción de la Petición SOAP**
-La petición debe seguir la estructura proporcionada en el WSDL y debe incluir los siguientes elementos codificados en base64:
+### **Construcción de la Petición SOAP**
+La petición al servicio web debe seguir la estructura proporcionada en el WSDL, utilizando formato XML con la cabecera y el cuerpo SOAP. El cuerpo debe contener los datos JSON codificados en base64:
+
+##### **Ejemplo de Estructura SOAP**
 
 ```xml
-<SOAP-ENV:Envelope>
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope 
+    SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" 
+    xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" 
+    xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" 
+    xmlns:ns1="urn:documents" 
+    xmlns:ns2="http://xml.apache.org/xml-soap" 
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <SOAP-ENV:Body>
         <ns1:send_document>
             <sendoc xsi:type="ns2:Map">
                 <item>
-                    <key xsi:type="xsd:string">secado</key>
+                    <key xsi:type="xsd:string">sedaws</key>
                     <value xsi:type="xsd:string">{JSON codificado}</value>
                 </item>
                 <item>
-                    <key xsi:type="xsd:string">secldo</key>
+                    <key xsi:type="xsd:string">secado</key>
                     <value xsi:type="xsd:string">{JSON codificado}</value>
                 </item>
-                <!-- Otros campos como sededo, sedepr, sedeim -->
+                <!-- Otros items - campos como sededo, sedepr, sedeim -->
+            </sendoc>
+        </ns1:send_document>
+    </SOAP-ENV:Body>
+</SOAP-ENV:Envelope>
 ```
+
 ### **Paso 2: Ejemplo de JSON para CABDOC**
 ```json
 {
