@@ -63,27 +63,47 @@ La petición al servicio web debe seguir la estructura proporcionada en el WSDL,
 </SOAP-ENV:Envelope>
 ```
 
-### **Paso 2: Ejemplo de JSON para CABDOC**
+### **Formato de los Datos JSON**
+
+Los datos dentro del XML están en formato JSON, que debe estar correctamente estructurado. Cada sección representa un conjunto de datos que debe ser enviado.
+
+##### **Ejemplo de DATOEMP**
+
+
+
 ```json
 {
-    "CABDOC": {
-        "NITEMP": "900225722",
-        "NUMRES": "1234567891000AA",
-        "TDOCU": "01",
-        "NUMERO": "15111",
-        "FECDOC": "2024-09-24",
-        "FECVEN": "2024-10-24",
-        "NOMVEN": "Inversiones Piedra Del Sol S.A.",
-        "MONEDA": "COP",
-        "CLADET": "D",
-        "FORPAG": "2",
-        "TOTFAC": "284333.00",
-        "TOTIMP": "0.00",
-        "SUBTO": "323333.00",
-        "TIPOPE": "SS-CUFE",
-        "USUAR": "HSANJUAN",
-        "CLAVE": "890202024"
-    }
+	"DATOEMP": [
+		{
+			"NITEMP": "123456789",
+			"DIGVER": "1",
+			"NOMEMP": "Clinica de Pruebas Advancit S.A.",
+			"RASOCI": "Clinica de Pruebas Advancit S.A.",
+			"COREMP": "contacto@advancit.com",
+			"FECREG": "2022-07-15",
+			"SOFTWA": "BILLINGSOFT",
+			"IDESOF": "123abc45-678d-90ef-gh12-3456ijkl789m",
+			"PINSOT": "65432",
+			"URLENV": "https://vpfe.dian.gov.co/WcfDianCustomerServices.svc?wsdl",
+			"PREFIJ": "FACV",
+			"NUMRES": "98765432100",
+			"FECRES": "2020-05-10",
+			"RESINI": "100000001",
+			"RESFIN": "100500000",
+			"FEREIN": "2020-05-10",
+			"FEREFI": "2035-05-10",
+			"DIREMP": "Avenida Central 123",
+			"TELEMP": "3001234567",
+			"CERTIF": "CertificadoFicticio.p12",
+			"PASCER": "claveSegura123",
+			"TECKEY": "ab12cd34ef56gh78ij90klmn123opqrs456tuvwx",
+			"TESIDE": "1a2b3c4d-5678-9e0f-gh12-ijklmno34567",
+			"DEPEMP": "11",
+			"CIUEMP": "11001000",
+			"REGID": "",
+			"REGNAM": ""
+		}
+	]
 }
 ```
 
