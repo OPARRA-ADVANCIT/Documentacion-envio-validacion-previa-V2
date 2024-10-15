@@ -82,7 +82,7 @@ Los datos dentro del XML están en formato JSON, que debe estar correctamente es
 | Codigo sucursal o tienda. | CODSUC |  | CHAR(50) | NO |
 | Numero de factura referenciada si la nota crédito es tipo F | NUMREF |  | CHAR(40) | SI si es nota credito |
 | Código de formato de diseño de las facturas al generar el PDF. | FORIMP |  | CHAR(2) |  NO (Esto se define si existen muchos diseños de facturas.)|
-| Este campo se utiliza si la factura, nota crédito, nota débito necesita agrupamientos. <br>D:Detallado, <br>U:Unico | CLADET | | | |
+| Este campo se utiliza si la factura, nota crédito, nota débito necesita agrupamientos. <br>D:Detallado, <br>U:Unico | CLADET | | CHAR(1) | NO |
 
 
 ##### **Ejemplo de CABDOC**
