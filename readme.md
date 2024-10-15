@@ -298,7 +298,7 @@ Este JSON debe codificarse en base64 antes de ser incluido en el valor correspon
 Este JSON debe codificarse en base64 antes de ser incluido en el valor correspondiente dentro del XML SOAP.
 
 
-## Campos de Impuestos (DETIMP)
+## Campos de Impuestos (DETIMPDOC)
 
 | Descripción                        | Nombre   | Ejemplo          | Especificación | Nota                                          | Oblig. |
 |------------------------------------|----------|------------------|----------------|-----------------------------------------------|--------|
@@ -387,7 +387,7 @@ Este JSON debe codificarse en base64 antes de ser incluido en el valor correspon
 Este JSON debe codificarse en base64 antes de ser incluido en el valor correspondiente dentro del XML SOAP.
 
 
-## Campos de Detalle del Producto (DETPRO)
+## Campos de Detalle del Producto (DETALLEPRO)
 | Descripción                        | Nombre   | Ejemplo          | Especificación  | Nota                                                    | Oblig. |
 |------------------------------------|----------|------------------|-----------------|---------------------------------------------------------|--------|
 | Consecutivo de detalle de productos | IDEPOS   | 1                | INT(6)          | Consecutivo de productos en el documento.                | SI     |
