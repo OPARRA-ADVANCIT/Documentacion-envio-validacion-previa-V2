@@ -68,21 +68,58 @@ La petición al servicio web debe seguir la estructura proporcionada en el WSDL,
 Los datos dentro del XML están en formato JSON, que debe estar correctamente estructurado. Cada sección representa un conjunto de datos que debe ser enviado.
 
 ## Campos de la Cabecera del Documento (CABDOC)
-| Descripción                     | Nombre  | Ejemplo                     | Especificaciones    | Nota |
-|----------------------------------|---------|-----------------------------|---------------------|------|
-| Nit de la empresa que factura    | NITEMP  | 900225722                   | CHAR(30)            | SI   |
-| Número de resolución autorizada  | NUMRES  | 1234567891000AA             | CHAR(40)            | SI   |
-| Tipo de documento a enviar  <br>01: Facturas.  <br>02: Notas débito.  <br>03: Notas crédito.      | TDOCU   | 01                          | CHAR(2)             | SI   |
-| Número de la factura, nota crédito o nota débito             | NUMERO  | 15111                       | CHAR(20)            | SI   |
-| Fecha de generación de la factura, nota crédito o nota débito| FECDOC  | 2019-05-31                  | CHAR(40)            | SI   |
-| Fecha de vencimiento, nota crédito o nota débito             | FECVEN  | 2019-05-31                  | CHAR(40)            | SI   |
-| Nombre del vendedor              | NOMVEN  | Inversiones Piedra Del Sol S.A. | CHAR(255)        | NO   |
-| Codigo de moneda de la factura, nota crédito o nota débito             | MONEDA  | COP                         | CHAR(3)             | SI   |
-| Tipo de envió para las notas crédito. <br>R: Si es una nota crédito con referencia a otra factura.             | TIPCRU  |                          |  CHAR(1)            |  SI (si es nota crédito.)  |
-| Codigo sucursal o tienda. | CODSUC |  | CHAR(50) | NO |
-| Numero de factura referenciada si la nota crédito es tipo F | NUMREF |  | CHAR(40) | SI si es nota credito |
-| Código de formato de diseño de las facturas al generar el PDF. | FORIMP |  | CHAR(2) |  NO (Esto se define si existen muchos diseños de facturas.)|
-| Este campo se utiliza si la factura, nota crédito, nota débito necesita agrupamientos. <br>D:Detallado, <br>U:Unico | CLADET | | CHAR(1) | NO |
+| Descripción                        | Nombre   | Ejemplo          | Especificación | Nota                                          | Oblig. |
+|------------------------------------|----------|------------------|----------------|-----------------------------------------------|--------|
+| Nit de la empresa que factura      | NITEMP   | 900225722        | CHAR(30)       | No completar con nada ni a la izquierda ni a la derecha. | SI     |
+| Numero de resolución autorizada    | NUMRES   | 1234567891000AA  | CHAR(40)       | No completar con nada ni a la izquierda ni a la derecha. | SI     |
+| Tipo de documento a enviar         | TDOCU    | 01               | CHAR(2)        | 01: Facturas, 02: Notas débito, 03: Notas crédito. | SI     |
+| Numero de factura                  | NUMERO   | 15111            | CHAR(20)       | No completar con nada ni a la izquierda ni a la derecha. | SI     |
+| Fecha de generación de factura     | FECDOC   | 2019-05-31       | CHAR(40)       | No completar con nada ni a la izquierda ni a la derecha. | SI     |
+| Fecha de vencimiento de factura    | FECVEN   | 2019-05-31       | CHAR(40)       | No completar con nada ni a la izquierda ni a la derecha. | SI     |
+| Nombre del vendedor                | NOMVEN   | Inversiones Piedra Del Sol S. A. | CHAR(255) | No completar con nada ni a la izquierda ni a la derecha. | NO     |
+| Código de moneda de la factura     | MONEDA   | COP              | CHAR(3)        | Código de la moneda.                              | SI     |
+| Tipo de envío para notas crédito   | TIPCRU   |                  | CHAR(1)        | Aplica solo para notas crédito.                       | SI     |
+| Código sucursal o tienda           | CODSUC   |                  | CHAR(50)       | Código sucursal o tienda.                            | NO     |
+| Número de factura referenciada     | NUMREF   |                  | CHAR(40)       | Solo aplica para notas crédito de tipo F.               | SI     |
+| Código de formato de diseño        | FORIMP   |                  | CHAR(2)        | Código de formato de diseño para el PDF.          | NO     |
+| Clasificación del documento        | CLADET   |                  | CHAR(1)        | D: Detallado, U: Único.                           | NO     |
+| Medios de pago                     | FORPAG   |                  | CHAR(2)        | Ver tabla estándar DIAN 6.3.4.2.                  | SI     |
+| Orden de compra                    | ORDENC   |                  | CHAR(40)       | Si requiere manejar número de orden de compra.    | NO     |
+| Número de remisión                 | NUREMI   |                  | CHAR(40)       | Si requiere manejar número de remisión.           | NO     |
+| Nota de recepción                  | NORECE   |                  | CHAR(40)       | Si requiere manejar nota de recepción.            | NO     |
+| EAN tienda entrega                 | EANTIE   |                  | CHAR(40)       | Código EAN de tienda de entrega.                   | NO     |
+| Código moneda origen               | COMODE   |                  | CHAR(3)        | Código moneda de origen.                           | SI si es factura de exportación |
+| Código moneda destino              | COMOHA   |                  | CHAR(3)        | Código moneda de destino.                          | SI si es factura de exportación |
+| Factor cálculo moneda              | FACCAL   |                  | CHAR(12)       | Valor tasa de cambio de moneda extranjera.         | SI si es factura de exportación |
+| Fecha de tasa de cambio            | FETACA   |                  | CHAR(20)       | Fecha en la que se tomó la tasa de cambio.         | SI si es factura de exportación |
+| Fecha del documento referenciado   | FECREF   |                  | CHAR(20)       | Fecha en la que se generó el documento referenciado. | SI para notas crédito |
+| Observaciones documento referenciado | OBSREF |                  | CHAR(200)      | Observaciones del documento referenciado.         | SI para notas crédito |
+| Observaciones generales            | OBSERV   |                  | CHAR(200)      | Si requiere una observación en la factura.        | NO     |
+| Texto de la factura                | TEXDOC   |                  | CHAR(950)      | Texto adicional de la factura.                    | NO     |
+| Motivo devolución DIAN             | MODEDI   |                  | CHAR(1)        | Ver tabla DIAN 6.2.5.                             | SI para notas crédito |
+| Número de entrega                  | NUMENT   |                  | CHAR(10)       | Si requiere manejar número de entrega.            | NO     |
+| Número de factura DIAN             | NDIAN    |                  | CHAR(18)       | Número de la factura para pruebas.                 | NO     |
+| Organización de ventas             | SOCIED   |                  | CHAR(40)       | Código de la organización de ventas.               | NO     |
+| Código del vendedor                | CODVEN   |                  | CHAR(40)       | Si requiere código de vendedor en la factura.      | NO     |
+| Motivo de devolución               | MOTDEV   |                  | CHAR(200)      | Motivo de devolución de la nota crédito.           | NO     |
+| Subtotal del documento             | SUBTOT   | 46218.00         | DEC(15,2)      | Valor sin impuestos, descuentos y anticipos.     | SI     |
+| Base para calcular impuestos       | BASIMP   | 46218.00         | DEC(15,2)      | Valor sobre el cual se calculan los impuestos.    | SI     |
+| Total a pagar                      | TOTFAC   | 54999.42         | DEC(15,2)      | Resultado de SUBTOT + TOTIMP.                   | SI     |
+| Total de impuestos                 | TOTIMP   | 8781.42          | DEC(15,2)      | Multiplicación de SUBTOT por el porcentaje de impuestos. | SI     |
+| Valor total de descuentos          | TOTDES   | 0.00             | DEC(15,2)      |                                                 | NO     |
+| Días para realizar el pago         | DIPAPA   | 0                | INT(4)         | Si se otorgan días para el pago de la factura.    | NO     |
+| Tipo de operación                  | TIPOPE   |                  | CHAR(2)        | Ver tabla DIAN 6.1.5. Tipos de operación.         | SI     |
+| Usuario                            | USUAR    |                  | CHAR(30)       |                                                 | SI     |
+| Clave                              | CLAVE    |                  | CHAR(30)       |                                                 | SI     |
+| Clase persona                      | CLAPER   | 1                | CHAR(1)        | Ver tabla DIAN 6.2.3.                           | SI     |
+| Código documento                   | CODDOC   | 31               | CHAR(2)        | Código de documento de identificación.           | SI     |
+| Número de documento                | NUMDOC   | 900496336        | CHAR(20)       | No completar con nada ni a la izquierda ni a la derecha. | SI     |
+| Dígito de verificación             | DIVECL   | 2                | CHAR(1)        | Solo aplica si es código de documento 31.        | SI     |
+| Código país                        | PAICLI   | CO               | CHAR(2)        | CO=Colombia (ISO 3166-1).                        | SI     |
+| Departamento del cliente           | DEPCLI   | Santander        | CHAR(40)       | No completar con nada ni a la izquierda ni a la derecha. | SI     |
+| Ciudad del cliente                 | CIUCLI   | San Gil          | CHAR(40)       | No completar con nada ni a la izquierda ni a la derecha. | SI     |
+| Barrio del cliente                 | LOCCLI   |                  | CHAR(40)       | Si requiere indicar el barrio del cliente.        | NO     |
+| Dirección del cliente              | DIRCLI   | Kilómetro 1 Vía San Gil Charalá | CHAR(200) | No completar
 
 
 ##### **Ejemplo de CABDOC**
