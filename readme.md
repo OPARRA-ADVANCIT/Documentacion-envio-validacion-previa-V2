@@ -159,24 +159,7 @@ Los datos dentro del XML están en formato JSON, que debe estar correctamente es
 		"TIPOPE": "SS-Recaudo",
 		"MEDPAG": "10",
 		"CLAVE": "123456789",
-		"USUAR": "ADVANCIT",
-		"INPESD": "2024-10-10",
-		"INPEST": "00:00:00-05:00",
-		"INPEND": "2024-10-10",
-		"INPENT": "23:59:59-05:00",
-		"ANDREID": "",
-		"ANDREDA": "",
-		"ANDREDT": "",
-		"CUNAMA": "",
-		"CUVALA": "",
-		"CUNAMB": "",
-		"CUVALB": "",
-		"CIGSHN": "",
-		"CIGCSH": "",
-		"IPTURD": "",
-		"PREPID": 0,
-		"PREPAM": "",
-		"PREDRE": ""
+		"USUAR": "ADVANCIT"
 	}
 }
 ```
