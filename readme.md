@@ -113,17 +113,6 @@ Los datos dentro del XML están en formato JSON, que debe estar correctamente es
 | Clave                              | CLAVE    |                  | CHAR(30)       |                                                 | SI     |
 
 
-| Clase persona                      | CLAPER   | 1                | CHAR(1)        | Ver tabla DIAN 6.2.3.                           | SI     |
-| Código documento                   | CODDOC   | 31               | CHAR(2)        | Código de documento de identificación.           | SI     |
-| Número de documento                | NUMDOC   | 900496336        | CHAR(20)       | No completar con nada ni a la izquierda ni a la derecha. | SI     |
-| Dígito de verificación             | DIVECL   | 2                | CHAR(1)        | Solo aplica si es código de documento 31.        | SI     |
-| Código país                        | PAICLI   | CO               | CHAR(2)        | CO=Colombia (ISO 3166-1).                        | SI     |
-| Departamento del cliente           | DEPCLI   | Santander        | CHAR(40)       | No completar con nada ni a la izquierda ni a la derecha. | SI     |
-| Ciudad del cliente                 | CIUCLI   | San Gil          | CHAR(40)       | No completar con nada ni a la izquierda ni a la derecha. | SI     |
-| Barrio del cliente                 | LOCCLI   |                  | CHAR(40)       | Si requiere indicar el barrio del cliente.        | NO     |
-| Dirección del cliente              | DIRCLI   | Kilómetro 1 Vía San Gil Charalá | CHAR(200) | No completar
-
-
 ##### **Ejemplo de CABDOC**
 
 ```json
