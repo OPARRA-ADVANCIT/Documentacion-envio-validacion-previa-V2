@@ -219,9 +219,7 @@ Este JSON debe codificarse en base64 antes de ser incluido en el valor correspon
 		"NOMPAI": "COLOMBIA",
 		"CODCIU": "11001",
 		"CODDEP": "11",
-		"OBLCON": "O-15",
-		"REGID": "",
-		"REGNAM": ""
+		"OBLCON": "O-15"
 	}
 }
 
@@ -262,9 +260,7 @@ Este JSON debe codificarse en base64 antes de ser incluido en el valor correspon
 			"VALDED": "36000.00",
 			"PORIMD": "0.00",
 			"CODIMD": "ZY",
-			"NOMIMD": "No causa",
-			"DESSAA": "",
-			"DESSAB": ""
+			"NOMIMD": "No causa"
 		},
 		{
 			"IDEPOS": 2,
@@ -278,9 +274,7 @@ Este JSON debe codificarse en base64 antes de ser incluido en el valor correspon
 			"VALDED": "10440.00",
 			"PORIMD": "0.00",
 			"CODIMD": "ZY",
-			"NOMIMD": "No causa",
-			"DESSAA": "",
-			"DESSAB": ""
+			"NOMIMD": "No causa"
 		},
 		{
 			"IDEPOS": 3,
@@ -294,9 +288,7 @@ Este JSON debe codificarse en base64 antes de ser incluido en el valor correspon
 			"VALDED": "5440.00",
 			"PORIMD": "0.00",
 			"CODIMD": "ZY",
-			"NOMIMD": "No causa",
-			"DESSAA": "",
-			"DESSAB": ""
+			"NOMIMD": "No causa"
 		}
 	]
 }
@@ -307,6 +299,7 @@ Este JSON debe codificarse en base64 antes de ser incluido en el valor correspon
 
 
 ## Campos de Impuestos (DETIMP)
+
 | Descripción                        | Nombre   | Ejemplo          | Especificación | Nota                                          | Oblig. |
 |------------------------------------|----------|------------------|----------------|-----------------------------------------------|--------|
 | Consecutivo impuestos documento    | IDEIMP   | 1                | INT(6)          | Número Consecutivo.                                       | SI     |
