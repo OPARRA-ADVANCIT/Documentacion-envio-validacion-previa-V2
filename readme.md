@@ -111,6 +111,8 @@ Los datos dentro del XML están en formato JSON, que debe estar correctamente es
 | Tipo de operación                  | TIPOPE   |                  | CHAR(2)        | Ver tabla DIAN 6.1.5. Tipos de operación.         | SI     |
 | Usuario                            | USUAR    |                  | CHAR(30)       |                                                 | SI     |
 | Clave                              | CLAVE    |                  | CHAR(30)       |                                                 | SI     |
+
+
 | Clase persona                      | CLAPER   | 1                | CHAR(1)        | Ver tabla DIAN 6.2.3.                           | SI     |
 | Código documento                   | CODDOC   | 31               | CHAR(2)        | Código de documento de identificación.           | SI     |
 | Número de documento                | NUMDOC   | 900496336        | CHAR(20)       | No completar con nada ni a la izquierda ni a la derecha. | SI     |
@@ -188,6 +190,282 @@ Los datos dentro del XML están en formato JSON, que debe estar correctamente es
 		"PREDRE": ""
 	}
 }
+```
+
+Este JSON debe codificarse en base64 antes de ser incluido en el valor correspondiente dentro del XML SOAP.
+
+## Campos de Datos del Cliente (CLIDOC)
+| Descripción                        | Nombre   | Ejemplo          | Especificación | Nota                                          | Oblig. |
+|------------------------------------|----------|------------------|----------------|-----------------------------------------------|--------|
+| Clase persona                      | CLAPER   | 1                | CHAR(1)        | Ver tabla DIAN 6.2.3.                           | SI     |
+| Código documento                   | CODDOC   | 31               | CHAR(2)        | Código de documento de identificación.           | SI     |
+| Número de documento                | NUMDOC   | 900496336        | CHAR(20)       | No completar con nada ni a la izquierda ni a la derecha. | SI     |
+| Dígito de verificación             | DIVECL   | 2                | CHAR(1)        | Solo aplica si es código de documento 31.        | SI     |
+| Código país                        | PAICLI   | CO               | CHAR(2)        | CO=Colombia (ISO 3166-1).                        | SI     |
+| Departamento del cliente           | DEPCLI   | Santander        | CHAR(40)       | No completar con nada ni a la izquierda ni a la derecha. | SI     |
+| Ciudad del cliente                 | CIUCLI   | San Gil          | CHAR(40)       | No completar con nada ni a la izquierda ni a la derecha. | SI     |
+| Barrio del cliente                 | LOCCLI   |                  | CHAR(40)       | Si requiere indicar el barrio del cliente.        | NO     |
+| Dirección del cliente              | DIRCLI   | Kilómetro 1 Vía San Gil Charalá | CHAR(200) | No completar con nada ni a la izquierda ni a la derecha. | SI |
+| Teléfono del cliente               | TELCLI   | 3208376408       | CHAR(200)       | No completar con nada ni a la izquierda ni a la derecha. | SI     |
+| Nombre y apellidos completos       | NOMCON   | Fyg S.a.s.       | CHAR(200)       | No completar con nada ni a la izquierda ni a la derecha. | SI     |
+| Régimen tributario                 | REGTRI   | 2                | CHAR(4)         | Tabla DIAN - Régimen Tributario (0 Simplificado, 2 Común)| SI     |
+| Razón social cliente               | RAZSOC   | Fyg S.a.s.       | CHAR(200)       | No completar con nada ni a la izquierda ni a la derecha. | SI si código de documento 31 |
+| Primer nombre                      | PNOMBR   |                  | CHAR(100)       | No completar con nada ni a la izquierda ni a la derecha. | SI si código de documento 13 |
+| Segundo nombre                     | SNOMBR   |                  | CHAR(100)       | No completar con nada ni a la izquierda ni a la derecha. | SI si código de documento 13 |
+| Apellidos                          | APELLI   |                  | CHAR(100)       | No completar con nada ni a la izquierda ni a la derecha. | SI si código de documento 13 |
+| Mail de notificación               | MAICLI   | siac_frr@hotmail.com | CHAR(255)    | No completar con nada ni a la izquierda ni a la derecha. | SI     |
+| Número de matrícula                | NUMMAT   |                  | CHAR(150)       | Si requiere manejar número de matrícula.                  | NO     |
+| Nombre país                        | NOMPAI   | Colombia         | CHAR(150)       | No completar con nada ni a la izquierda ni a la derecha. | SI     |
+| Código ciudad                      | CODCIU   | 68001            | CHAR(20)        | Fuente tabla DANE.                                        | SI     |
+| Código departamento                | CODDEP   | 68               | CHAR(20)        | Fuente tabla DANE.                                        | SI     |
+| Obligaciones o responsabilidades   | OBLCON   | O-09             | CHAR(200)       | Ver tabla DIAN 6.2.7.                                     | SI     |
+
+
+##### **Ejemplo de CLIDOC**
+
+```json
+{
+	"CLIDOC": {
+		"CLAPER": "1",
+		"CODDOC": "31",
+		"NUMDOC": "123456789",
+		"DIVECL": "5",
+		"PAICLI": "CO",
+		"DEPCLI": "BOGOTA D.C.",
+		"CIUCLI": "BOGOTA",
+		"LOCCLI": "",
+		"DIRCLI": "AVENIDA 45 N 67-123",
+		"TELCLI": "3201234567",
+		"NOMCON": "CLINICA DE PRUEBAS ADVANCIT",
+		"REGTRI": "4",
+		"RAZSOC": "CLINICA DE PRUEBAS ADVANCIT S.A.",
+		"PNOMBR": "",
+		"SNOMBR": "",
+		"APELLI": "",
+		"MAICLI": "contacto@advancit.com",
+		"NUMMAT": "",
+		"NOMPAI": "COLOMBIA",
+		"CODCIU": "11001",
+		"CODDEP": "11",
+		"OBLCON": "O-15",
+		"REGID": "",
+		"REGNAM": ""
+	}
+}
+
+```
+
+Este JSON debe codificarse en base64 antes de ser incluido en el valor correspondiente dentro del XML SOAP.
+
+## Campos de Detalle del Documento (DETDOC)
+| Descripción                        | Nombre   | Ejemplo          | Especificación | Nota                                          | Oblig. |
+|------------------------------------|----------|------------------|----------------|-----------------------------------------------|--------|
+| Consecutivo detalle documento      | IDEPOS   | 1                | INT(6)          | Número Consecutivo.                                       | SI     |
+| Código de producto                 | CODITE   | 1                | CHAR(40)        | No completar con nada ni a la izquierda ni a la derecha.  | SI     |
+| Descripción del producto           | NOMITE   | Triturado De 1/2 Menor Calidad | CHAR(255) | No completar con nada ni a la izquierda ni a la derecha.  | SI     |
+| Unidad de medida                   | UNIMED   | 94               | CHAR(5)         | Ver tabla DIAN 6.3.6.                                     | SI     |
+| Cantidad del producto              | CANITE   | 2.00             | DEC(8,2)        |                                                          | SI     |
+| Valor unitario del producto        | VALITE   | 23109.00         | DEC(15,2)       | Valor sin impuestos y unitario del artículo.              | SI     |
+| Valor total de los productos       | TOTVAD   | 46218.00         | DEC(15,2)       | Resultado de multiplicar VALITE * CANITE.                 | SI     |
+| Valor del impuesto                 | VALIMD   | 8781.42          | DEC(15,2)       | Resultado de multiplicar TOTVAD * PORIMD.                 | SI     |
+| Valor del descuento                | VALDED   | 0.00             | DEC(15,2)       |                                                          | NO     |
+| Porcentaje del impuesto            | PORIMD   | 19.00            | DEC(15,2)       |                                                          | SI     |
+| Código del impuesto                | CODIMD   | 01               | CHAR(2)         | Código de impuesto tabla DIAN 6.2.2.                      | SI     |
+| Nombre del impuesto                | NOMIMD   | IVA              | CHAR(255)       | Nombre del impuesto tabla DIAN 6.2.2.                     | SI     |
+
+##### **Ejemplo de DETDOC**
+
+```json
+{
+	"DETDOC": [
+		{
+			"IDEPOS": 1,
+			"CODITE": "123456",
+			"NOMITE": "RESONANCIA MAGNETICA CEREBRAL",
+			"UNIMED": "",
+			"CANITE": "1.00",
+			"VALITE": "300000.00",
+			"TOTVAD": "264000.00",
+			"VALIMD": "0.00",
+			"VALDED": "36000.00",
+			"PORIMD": "0.00",
+			"CODIMD": "ZY",
+			"NOMIMD": "No causa",
+			"DESSAA": "",
+			"DESSAB": ""
+		},
+		{
+			"IDEPOS": 2,
+			"CODITE": "654321",
+			"NOMITE": "CONSULTA GENERAL DE PRIMERA VEZ",
+			"UNIMED": "",
+			"CANITE": "1.00",
+			"VALITE": "85000.00",
+			"TOTVAD": "74560.00",
+			"VALIMD": "0.00",
+			"VALDED": "10440.00",
+			"PORIMD": "0.00",
+			"CODIMD": "ZY",
+			"NOMIMD": "No causa",
+			"DESSAA": "",
+			"DESSAB": ""
+		},
+		{
+			"IDEPOS": 3,
+			"CODITE": "789012",
+			"NOMITE": "EXAMEN DE SANGRE COMPLETO",
+			"UNIMED": "",
+			"CANITE": "1.00",
+			"VALITE": "45000.00",
+			"TOTVAD": "39560.00",
+			"VALIMD": "0.00",
+			"VALDED": "5440.00",
+			"PORIMD": "0.00",
+			"CODIMD": "ZY",
+			"NOMIMD": "No causa",
+			"DESSAA": "",
+			"DESSAB": ""
+		}
+	]
+}
+
+```
+
+Este JSON debe codificarse en base64 antes de ser incluido en el valor correspondiente dentro del XML SOAP.
+
+
+## Campos de Impuestos (DETIMP)
+| Descripción                        | Nombre   | Ejemplo          | Especificación | Nota                                          | Oblig. |
+|------------------------------------|----------|------------------|----------------|-----------------------------------------------|--------|
+| Consecutivo impuestos documento    | IDEIMP   | 1                | INT(6)          | Número Consecutivo.                                       | SI     |
+| Código impuesto                    | CODIMP   | 01               | CHAR(2)         | Código de impuesto tabla DIAN 6.2.2.                      | SI     |
+| Nombre del impuesto                | NOMIMP   | IVA              | CHAR(255)       | Nombre del impuesto tabla DIAN 6.2.2.                     | SI     |
+| Porcentaje impuesto                | PORIMP   | 19.00            | DEC(15,2)       |                                                          | SI     |
+| Valor del impuesto                 | VALIMP   | 8781.42          | DEC(15,2)       | Valor impuesto resultado de multiplicar BASIMP * PORIMP.  | SI     |
+| Base gravable impuesto             | BASIMP   | 46218.00         | DEC(15,2)       | Valor sobre el cual se calculan los impuestos.            | SI     |
+
+##### **Ejemplo de DETIMP**
+
+```json
+{
+	"DETIMPDOC": [
+		{
+			"IDEIMP": 1,
+			"CODIMP": "ZY",
+			"NOMIMP": "No causa",
+			"PORIMP": "0.00",
+			"VALIMP": "0.00",
+			"BASIMP": "0.00"
+		}
+	]
+}
+```
+
+Este JSON debe codificarse en base64 antes de ser incluido en el valor correspondiente dentro del XML SOAP.
+
+
+## Campos de Detalle de Descuento (DETDES)
+| Descripción                        | Nombre   | Ejemplo          | Especificación  | Nota                                                    | Oblig. |
+|------------------------------------|----------|------------------|-----------------|---------------------------------------------------------|--------|
+| Consecutivo de descuento           | CONDES   |                  | INT(6)          | Número Consecutivo del descuento.                        | SI     |
+| Código de descuento                | CODDES   |                  | CHAR(2)         | Ver tabla DIAN 6.3.8.                                    | SI     |
+| Porcentaje de descuento            | PORDES   |                  | DEC(15,2)       |                                                          | SI     |
+| Valor de descuento                 | VALDES   |                  | DEC(15,2)       |                                                          | SI     |
+| Base sobre la cual se aplica el descuento | VABADE  |                  | DEC(15,2)       |                                                          | SI     |
+| Texto abierto del descuento        | TEXDES   |                  | CHAR(255)       |                                                          | SI     |
+
+
+##### **Ejemplo de DETDES**
+
+```json
+{
+	"DETDES": [
+		{
+			"CONDES": "",
+			"CODDES": "",
+			"PORDES": "",
+			"VALDES": "",
+			"VABADE": "",
+			"TEXDES": ""
+		}
+	]
+}
+```
+
+Este JSON debe codificarse en base64 antes de ser incluido en el valor correspondiente dentro del XML SOAP.
+
+
+## Campos Adicionales Documento (ADIDOC)
+| Descripción                        | Nombre   | Ejemplo          | Especificación  | Nota                                                    | Oblig. |
+|------------------------------------|----------|------------------|-----------------|---------------------------------------------------------|--------|
+| Identificador adicional            | IDEADD   | 1                | CHAR(6)         | Identificador adicional del documento.                    | SI     |
+| Descripción adicional              | TEXADD   | Información adicional | CHAR(100)  | Descripción adicional del documento.                    | SI     |
+| Valor adicional                    | VALNDD   | 1000.00          | DEC(15,2)       | Valor adicional en números.                              | NO     |
+| Valor adicional en texto           | VALTDD   | Mil Pesos        | CHAR(255)       | Valor adicional en texto.                                | NO     |
+
+
+##### **Ejemplo de ADIDOC**
+
+```json
+{
+	"ADIDOC": [
+		{
+			"IDEADD": "1",
+			"TEXADD": "",
+			"VALNDD": "",
+			"VALTDD": ""
+		}
+	]
+}
+```
+
+Este JSON debe codificarse en base64 antes de ser incluido en el valor correspondiente dentro del XML SOAP.
+
+
+## Campos de Detalle del Producto (DETPRO)
+| Descripción                        | Nombre   | Ejemplo          | Especificación  | Nota                                                    | Oblig. |
+|------------------------------------|----------|------------------|-----------------|---------------------------------------------------------|--------|
+| Consecutivo de detalle de productos | IDEPOS   | 1                | INT(6)          | Consecutivo de productos en el documento.                | SI     |
+| Código de producto                 | CODITE   | 123456789        | CHAR(40)        | Código del producto en el detalle.                       | SI     |
+| Código de posición del producto    | COPODP   | 01               | CHAR(2)         | Código de la posición del producto.                      | NO     |
+| Nombre de la posición del producto | NOPODP   | Producto A       | CHAR(200)       | Nombre asignado a la posición del producto.              | NO     |
+| Valor del producto                 | VAPODP   | 10000.00         | DEC(15,2)       | Valor del producto.                                      | SI     |
+| Porcentaje del producto            | POPODP   | 19.00            | DEC(15,2)       | Porcentaje aplicado al producto.                         | SI     |
+
+
+
+##### **Ejemplo de DETPRO**
+
+```json
+{
+	"DETALLEPRO": [
+		{
+			"IDEPOS": 1,
+			"CODITE": "123456",
+			"COPODP": "ZY",
+			"NOPODP": "No causa",
+			"VAPODP": "264000.00",
+			"POPODP": "0.00"
+		},
+		{
+			"IDEPOS": 2,
+			"CODITE": "654321",
+			"COPODP": "ZY",
+			"NOPODP": "No causa",
+			"VAPODP": "74560.00",
+			"POPODP": "0.00"
+		},
+		{
+			"IDEPOS": 3,
+			"CODITE": "789012",
+			"COPODP": "ZY",
+			"NOPODP": "No causa",
+			"VAPODP": "39560.00",
+			"POPODP": "0.00"
+		}
+	]
+}
+
 ```
 
 Este JSON debe codificarse en base64 antes de ser incluido en el valor correspondiente dentro del XML SOAP.
