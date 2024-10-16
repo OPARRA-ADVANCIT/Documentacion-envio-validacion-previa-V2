@@ -83,7 +83,7 @@ Los datos dentro del XML están en formato JSON, que debe estar correctamente es
 | Número de factura referenciada     | NUMREF   |                  | CHAR(40)       | Solo aplica para notas crédito de tipo F.               | SI     |
 | Código de formato de diseño        | FORIMP   |                  | CHAR(2)        | Código de formato de diseño para el PDF.          | NO     |
 | Clasificación del documento        | CLADET   |                  | CHAR(1)        | D: Detallado, U: Único.                           | NO     |
-| Medios de pago                     | FORPAG   |                  | CHAR(2)        | Ver tabla estándar DIAN 6.3.4.2.                  | SI     |
+| Formas de Pago                     | FORPAG   |                  | CHAR(2)        | Ver tabla Anexo-Tecnico-Factura-Electronica-de-Venta-vr-1-9.pdf (13.2.8.4.1 Formas de Pago: cbc:PaymentMeans/ID)                | SI     |
 | Orden de compra                    | ORDENC   |                  | CHAR(40)       | Si requiere manejar número de orden de compra.    | NO     |
 | Número de remisión                 | NUREMI   |                  | CHAR(40)       | Si requiere manejar número de remisión.           | NO     |
 | Nota de recepción                  | NORECE   |                  | CHAR(40)       | Si requiere manejar nota de recepción.            | NO     |
@@ -109,6 +109,7 @@ Los datos dentro del XML están en formato JSON, que debe estar correctamente es
 | Valor total de descuentos          | TOTDES   | 0.00             | DEC(15,2)      |                                                 | NO     |
 | Días para realizar el pago         | DIPAPA   | 0                | INT(4)         | Si se otorgan días para el pago de la factura.    | NO     |
 | Tipo de operación                  | TIPOPE   |                  | CHAR(2)        | Ver tabla DIAN 6.1.5. Tipos de operación.         | SI     |
+| Medios de Pago		     | MEDPAG 	| 40		   | |||
 | Usuario                            | USUAR    |                  | CHAR(30)       |                                                 | SI     |
 | Clave                              | CLAVE    |                  | CHAR(30)       |                                                 | SI     |
 
