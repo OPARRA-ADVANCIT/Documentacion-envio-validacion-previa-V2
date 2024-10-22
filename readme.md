@@ -21,7 +21,7 @@ Los datos que se deben enviar en la petición SOAP incluyen las siguientes secci
 - **CABDOC**: Información de la cabecera del documento.
 - **CLIDOC**: Información del cliente.
 - **DETDOC**: Detalle del documento.
-- **DETPRO**: Detalle de productos.
+- **DETALLEPRO**: Detalle de productos.
 - **DETIMP**: Detalle de impuestos.
 - **ADIDOC**: Información adicional del documento.
 - **DETDES**: Detalle de descuentos.
@@ -541,7 +541,7 @@ Donde `[nombre_campo_XML]` hace referencia a la sección específica del JSON qu
 | `secado`          | `CABDOC`           | Información de la cabecera del documento (factura)   |
 | `secldo`          | `CLIDOC`           | Información del cliente                              |
 | `sededo`          | `DETDOC`           | Detalle de los productos o ítems del documento       |
-| `sedepr`          | `DETPRO`           | Detalle del producto adicional                       |
+| `sedepr`          | `DETALLEPRO`           | Detalle del producto adicional                       |
 | `sedeim`          | `DETIMP`           | Detalle de los impuestos aplicados                   |
 | `seaddo`          | `ADIDOC`           | Información adicional del documento                  |
 | `sedaws`          | `DATOEMP`          | Datos de la empresa que emite el documento           |
@@ -585,7 +585,7 @@ Donde `[nombre_campo_XML]` hace referencia a la sección específica del JSON qu
                     <value xsi:type="xsd:string">{JSON DETDOC codificado en BASE64}</value>
                 </item>
 
-                <!-- DETPRO - Detalle del producto adicional (vacío en este caso) -->
+                <!-- DETALLEPRO - Detalle del producto adicional (vacío en este caso) -->
                 <item>
                     <key xsi:type="xsd:string">sedepr</key>
                     <value xsi:type="xsd:string">e30=</value>
