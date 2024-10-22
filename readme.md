@@ -619,5 +619,24 @@ Donde `[nombre_campo_XML]` hace referencia a la sección específica del JSON qu
     </SOAP-ENV:Body>
 </SOAP-ENV:Envelope>
 ```
+
 **Nota:** Los json encriptados en BASE64 no deben ir contenidos entre las llaves cuando nos refereimos a {JSON DATOEMP codificado en BASE64} dentro del valor del item.
 En este ejemplo, cada campo dentro del XML (`secado`, `secldo`, `sededo`, etc.) hace referencia a un bloque JSON específico que contiene datos codificados en BASE64. Es importante asegurarse de que todos los datos estén correctamente formateados y codificados antes de su envío.
+
+---
+
+### **7. Documentación Relacionada**
+
+Para cumplir con los requisitos técnicos y normativos de la facturación electrónica en Colombia, es importante consultar la documentación oficial proporcionada por la DIAN. A continuación, se incluyen enlaces a los documentos clave y herramientas que son referenciados a lo largo de este manual:
+
+#### **7.1. Documentación Oficial de la DIAN**
+Este documento detalla las especificaciones técnicas para la implementación de la facturación electrónica de acuerdo con las normativas vigentes en Colombia:
+
+- [Anexo Técnico Factura Electrónica de Venta - Versión 1.9](https://www.dian.gov.co/impuestos/factura-electronica/Documents/Anexo-Tecnico-Factura-Electronica-de-Venta-vr-1-9.pdf)
+
+#### **7.2. Caja de Herramientas Técnica**
+La DIAN proporciona una serie de recursos y herramientas técnicas que apoyan el proceso de integración de la facturación electrónica. Estos recursos incluyen documentación técnica adicional, ejemplos, y herramientas de validación:
+
+- [Caja de Herramientas Técnica - Sistema de Facturación Electrónica](https://micrositios.dian.gov.co/sistema-de-facturacion-electronica/documentacion-tecnica/)
+
+---
