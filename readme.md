@@ -67,6 +67,67 @@ La petición al servicio web debe seguir la estructura proporcionada en el WSDL,
 
 Los datos dentro del XML están en formato JSON, que debe estar correctamente estructurado. Cada sección representa un conjunto de datos que debe ser enviado.
 
+## Campos de la Cabecera del Documento (DATOEMP)
+| Descripción                        | Nombre   | Ejemplo                       | Especificación  | Nota                                                    | Oblig. |
+|------------------------------------|----------|-------------------------------|-----------------|---------------------------------------------------------|--------|
+| Nit de la empresa                  | NITEMP   | 123456789                     | CHAR(9)          |                                                        | SI     |
+| Dígito de verificación             | DIGVER   | 8                             | CHAR(1)          |                                                        | SI     |
+| Nombre de la empresa               | NOMEMP   | ABC+SOLUTIONS+SAS              | CHAR(255)        |                                                        | SI     |
+| Razón social                       | RASOCI   | ABC+SOLUTIONS+SAS              | CHAR(255)        |                                                        | SI     |
+| Correo electrónico                 | COREMP   | info@abcsolutions.com          | CHAR(200)        |                                                        | SI     |
+| Fecha de registro                  | FECREG   | 2020-06-30                    | DATE             |                                                        | SI     |
+| Nombre del software                | SOFTWA   | EASYBILLING                    | CHAR(200)        |                                                        | SI     |
+| ID del software                    | IDESOF   | 11111111-2222-3333-4444-555555555555 | CHAR(36)         |                                                        | SI     |
+| PIN del software                   | PINSOT   | 67890                         | CHAR(5)          |                                                        | NO     |
+| URL de envío                       | URLENV   | https:\/\/dian-fake.com\/WcfDianCustomerServices.svc?wsdl | CHAR(255) |                                                        | SI     |
+| Prefijo                            | PREFIJ   | FACT                          | CHAR(4)          |                                                        | SI     |
+| Número de resolución               | NUMRES   | 9876543210                    | CHAR(30)         |                                                        | SI     |
+| Fecha de la resolución             | FECRES   | 2021-01-01                    | DATE             |                                                        | SI     |
+| Rango inicial de la resolución     | RESINI   | 100000000                     | CHAR(30)         |                                                        | SI     |
+| Rango final de la resolución       | RESFIN   | 200000000                     | CHAR(30)         |                                                        | SI     |
+| Fecha inicio de resolución         | FEREIN   | 2021-02-01                    | DATE             |                                                        | SI     |
+| Fecha fin de resolución            | FEREFI   | 2031-02-01                    | DATE             |                                                        | SI     |
+| Dirección de la empresa            | DIREMP   | CALLE 123 # 45-67 BOGOTA       | CHAR(255)        |                                                        | SI     |
+| Teléfono de la empresa             | TELEMP   | 6019876543                    | CHAR(10)         |                                                        | SI     |
+| Certificado                        | CERTIF   | CertificadoFicticio.p12        | CHAR(255)        |                                                        | NO     |
+| Contraseña del certificado         | PASCER   | abc1234XYZ                    | CHAR(16)         |                                                        | NO     |
+| Clave técnica                      | TECKEY   | a1b2c3d4e5f67890abcdef1234567890 | CHAR(40) |                                                      | NO     |
+| Tesid                              | TESIDE   | aabbccdd-eeff-1122-3344-556677889900 | CHAR(36) |                                                    | NO     |
+##### **Ejemplo de DATOEMP**
+```json
+
+{
+  "DATOEMP": [
+    {
+      "NITEMP": "123456789",
+      "DIGVER": "8",
+      "NOMEMP": "ABC+SOLUTIONS+SAS",
+      "RASOCI": "ABC+SOLUTIONS+SAS",
+      "COREMP": "info@abcsolutions.com",
+      "FECREG": "2020-06-30",
+      "SOFTWA": "EASYBILLING",
+      "IDESOF": "11111111-2222-3333-4444-555555555555",
+      "PINSOT": "67890",
+      "URLENV": "https://dian-fake.com/WcfDianCustomerServices.svc?wsdl",
+      "PREFIJ": "FACT",
+      "NUMRES": "9876543210",
+      "FECRES": "2021-01-01",
+      "RESINI": "100000000",
+      "RESFIN": "200000000",
+      "FEREIN": "2021-02-01",
+      "FEREFI": "2031-02-01",
+      "DIREMP": "CALLE 123 # 45-67 BOGOTA",
+      "TELEMP": "6019876543",
+      "CERTIF": "CertificadoFicticio.p12",
+      "PASCER": "abc1234XYZ",
+      "TECKEY": "a1b2c3d4e5f67890abcdef1234567890",
+      "TESIDE": "aabbccdd-eeff-1122-3344-556677889900"
+    }
+  ]
+}
+```
+Este JSON debe codificarse en base64 antes de ser incluido en el valor correspondiente dentro del XML SOAP.
+
 ## Campos de la Cabecera del Documento (CABDOC)
 | Descripción                        | Nombre   | Ejemplo          | Especificación | Nota                                          | Oblig. |
 |------------------------------------|----------|------------------|----------------|-----------------------------------------------|--------|
@@ -102,14 +163,14 @@ Los datos dentro del XML están en formato JSON, que debe estar correctamente es
 | Organización de ventas             | SOCIED   |                  | CHAR(40)       | Código de la organización de ventas.               | NO     |
 | Código del vendedor                | CODVEN   |                  | CHAR(40)       | Si requiere código de vendedor en la factura.      | NO     |
 | Motivo de devolución               | MOTDEV   |                  | CHAR(200)      | Motivo de devolución de la nota crédito.           | NO     |
-| Subtotal del documento             | SUBTOT   | 46218.00         | DEC(15,2)      | Valor sin impuestos, descuentos y anticipos.     | SI     |
+| Subtotal del documento             | SUBTO   | 46218.00         | DEC(15,2)      | Valor sin impuestos, descuentos y anticipos.     | SI     |
 | Base para calcular impuestos       | BASIMP   | 46218.00         | DEC(15,2)      | Valor sobre el cual se calculan los impuestos.    | SI     |
 | Total a pagar                      | TOTFAC   | 54999.42         | DEC(15,2)      | Resultado de SUBTOT + TOTIMP.                   | SI     |
 | Total de impuestos                 | TOTIMP   | 8781.42          | DEC(15,2)      | Multiplicación de SUBTOT por el porcentaje de impuestos. | SI     |
 | Valor total de descuentos          | TOTDES   | 0.00             | DEC(15,2)      |                                                 | NO     |
 | Días para realizar el pago         | DIPAPA   | 0                | INT(4)         | Si se otorgan días para el pago de la factura.    | NO     |
 | Tipo de operación                  | TIPOPE   |                  | CHAR(2)        | Ver tabla DIAN 6.1.5. Tipos de operación.         | SI     |
-| Medios de Pago		     | MEDPAG 	| 40		   | |||
+| Medios de Pago		     | MEDPAG 	| 40		   | ||SI|
 | Usuario                            | USUAR    |                  | CHAR(30)       |                                                 | SI     |
 | Clave                              | CLAVE    |                  | CHAR(30)       |                                                 | SI     |
 
