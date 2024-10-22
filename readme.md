@@ -521,59 +521,103 @@ Si ocurre un error, es necesario manejar las excepciones de SOAP y analizar el c
 - **Errores de formato**: Asegúrate de que los campos obligatorios estén presentes y de que los valores numéricos estén correctamente calculados.
 - **Errores de conexión**: Verifica la conectividad con el servicio y que la URL del WSDL esté accesible.
 
-## 5. **Ejemplos Prácticos**
+## 5. **Relación entre las Cabeceras del XML y los Datos JSON**
+El cuerpo de la petición SOAP incluye un bloque `<sendoc>` que contiene varios ítems donde cada uno tiene una clave (key) en el XML y un valor (value) que corresponde a un conjunto de datos JSON codificado en BASE64. A continuación, se describe la relación entre los nombres de las cabeceras XML y los datos JSON:
+
+#### **Formato General de la Relación XML-JSON**
+Cada bloque en el XML tiene la siguiente estructura:
+```xml
+<item>
+    <key xsi:type="xsd:string">[nombre_campo_XML]</key>
+    <value xsi:type="xsd:string">{JSON codificado}</value>
+</item>
+```
+Donde `[nombre_campo_XML]` hace referencia a la sección específica del JSON que contiene la información relevante.
+
+#### **Relación de Campos:**
+
+| **Nombre en XML** | **Nombre en JSON** | **Descripción**                                      |
+|-------------------|--------------------|------------------------------------------------------|
+| `secado`          | `CABDOC`           | Información de la cabecera del documento (factura)   |
+| `secldo`          | `CLIDOC`           | Información del cliente                              |
+| `sededo`          | `DETDOC`           | Detalle de los productos o ítems del documento       |
+| `sedepr`          | `DETPRO`           | Detalle del producto adicional                       |
+| `sedeim`          | `DETIMP`           | Detalle de los impuestos aplicados                   |
+| `seaddo`          | `ADIDOC`           | Información adicional del documento                  |
+| `sedaws`          | `DATOEMP`          | Datos de la empresa que emite el documento           |
+| `datsal`          | `DATSAL`           | Información adicional relacionada con los ítems      |
+| `pursal`          | `PURSAL`           | Datos adicionales de archivos, como anexos          |
+| `prepai`          | `PREPAI`           | Información relacionada con el pago                  |
+
+
+## 6. **Ejemplos Prácticos**
 
 ### **Ejemplo completo de petición SOAP**
 ```xml
-<SOAP-ENV:Envelope>
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope 
+    SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" 
+    xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" 
+    xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" 
+    xmlns:ns1="urn:documents" 
+    xmlns:ns2="http://xml.apache.org/xml-soap" 
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    
     <SOAP-ENV:Body>
         <ns1:send_document>
             <sendoc xsi:type="ns2:Map">
+                <!-- CABDOC - Información de la cabecera del documento -->
                 <item>
                     <key xsi:type="xsd:string">secado</key>
-                    <value xsi:type="xsd:string">eyJDQUJE...</value> <!-- JSON codificado en base64 -->
+                    <value xsi:type="xsd:string">{JSON CABDOC codificado en BASE64}</value>
                 </item>
+
+                <!-- CLIDOC - Información del cliente -->
                 <item>
                     <key xsi:type="xsd:string">secldo</key>
-                    <value xsi:type="xsd:string">eyJDTElET...</value> <!-- JSON codificado en base64 -->
+                    <value xsi:type="xsd:string">{JSON CLIDOC codificado en BASE64}</value>
                 </item>
-                <!-- Más secciones -->
+
+                <!-- DETDOC - Detalle de los ítems del documento -->
+                <item>
+                    <key xsi:type="xsd:string">sededo</key>
+                    <value xsi:type="xsd:string">{JSON DETDOC codificado en BASE64}</value>
+                </item>
+
+                <!-- DETPRO - Detalle del producto adicional (vacío en este caso) -->
+                <item>
+                    <key xsi:type="xsd:string">sedepr</key>
+                    <value xsi:type="xsd:string">e30=</value>
+                </item>
+
+                <!-- DETIMP - Detalle de los impuestos -->
+                <item>
+                    <key xsi:type="xsd:string">sedeim</key>
+                    <value xsi:type="xsd:string">{JSON DETIMP codificado en BASE64}</value>
+                </item>
+
+                <!-- Información adicional del documento (vacío en este caso) -->
+                <item>
+                    <key xsi:type="xsd:string">seaddo</key>
+                    <value xsi:type="xsd:string">e30=</value>
+                </item>
+
+                <!-- DATOEMP - Información de la empresa -->
+                <item>
+                    <key xsi:type="xsd:string">sedaws</key>
+                    <value xsi:type="xsd:string">{JSON DATOEMP codificado en BASE64}</value>
+                </item>
+
+                <!-- Información adicional del cliente (vacío en este caso) -->
+                <item>
+                    <key xsi:type="xsd:string">sedecu</key>
+                    <value xsi:type="xsd:string">e30=</value>
+                </item>
             </sendoc>
         </ns1:send_document>
     </SOAP-ENV:Body>
 </SOAP-ENV:Envelope>
 ```
-
-## 6. **Seguridad**
-- El servicio puede requerir la autenticación mediante certificados, asegúrate de configurar los certificados correctamente en el servidor donde se consume el webservice.
-  
-## 7. **Conclusión**
-Este documento cubre los aspectos generales para consumir el webservice de facturación electrónica, proporcionando ejemplos prácticos y recomendaciones para un uso adecuado. Es importante realizar pruebas en ambientes de desarrollo antes de integrar este servicio en producción.
-
----
-
-
-
-## Campos de Cliente (CLIDOC)
-| Descripción                     | Nombre  | Ejemplo                     | Especificaciones    | Nota |
-|----------------------------------|---------|-----------------------------|---------------------|------|
-| Clase de persona                 | CLAPER  | 1                           | CHAR(1)             | SI   |
-| Código del documento             | CODDOC  | 31                          | CHAR(2)             | SI   |
-| Número de documento              | NUMDOC  | 900496336                   | CHAR(20)            | SI   |
-| Dígito de verificación del NIT    | DIVECL  | 2                           | CHAR(1)             | SI   |
-| País del cliente                 | PAICLI  | CO                          | CHAR(2)             | SI   |
-| Departamento del cliente         | DEPCLI  | Santander                   | CHAR(40)            | SI   |
-| Ciudad del cliente               | CIUCLI  | San Gil                     | CHAR(40)            | SI   |
-| Dirección del cliente            | DIRCLI  | Kilometro 1 Via San Gil      | CHAR(200)           | SI   |
-
-## Detalle del Documento (DETDOC)
-| Descripción                     | Nombre  | Ejemplo                     | Especificaciones    | Nota |
-|----------------------------------|---------|-----------------------------|---------------------|------|
-| Consecutivo del detalle          | IDEPOS  | 1                           | INT(6)              | SI   |
-| Código del producto              | CODITE  | 872520                      | CHAR(40)            | SI   |
-| Nombre del producto              | NOMITE  | COLANGIOGRAFIA - TOMOGRAFIA  | CHAR(255)           | SI   |
-| Cantidad del producto            | CANITE  | 1.00                        | DEC(8,2)            | SI   |
-| Valor unitario del producto      | VALITE  | 225333.00                   | DEC(15,2)           | SI   |
-| Valor total sin impuestos        | TOTVAD  | 198153.63                   | DEC(15,2)           | SI   |
-| Valor del impuesto               | VALIMD  | 0.00                        | DEC(15,2)           | NO   |
- 
+**Nota:** Los json encriptados en BASE64 no deben ir contenidos entre las llaves cuando nos refereimos a {JSON DATOEMP codificado en BASE64} dentro del valor del item.
+En este ejemplo, cada campo dentro del XML (`secado`, `secldo`, `sededo`, etc.) hace referencia a un bloque JSON específico que contiene datos codificados en BASE64. Es importante asegurarse de que todos los datos estén correctamente formateados y codificados antes de su envío.
