@@ -461,7 +461,7 @@ Este JSON debe codificarse en base64 antes de ser incluido en el valor correspon
 
 
 
-##### **Ejemplo de DETPRO**
+##### **Ejemplo de DETALLEPRO**
 
 ```json
 {
